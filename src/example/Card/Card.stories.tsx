@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Card } from './Card';
+import { styled } from 'styled-components';
+import { generateChipVars } from '../Chip/Chip';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
@@ -20,9 +22,14 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Primary: Story = {};
 
-// const CustomCard = styled(Card)`
-// `;
+const chipVariables = generateChipVars({
+  background: 'white',
+  text: 'yellow',
+});
+const CustomCard = styled(Card)`
+  ${chipVariables}
+`;
 
-// export const Customized: Story = {
-//   render: () => <CustomCard />,
-// };
+export const Customized: Story = {
+  render: () => <CustomCard />,
+};
