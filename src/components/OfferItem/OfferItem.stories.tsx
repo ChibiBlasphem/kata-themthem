@@ -86,7 +86,6 @@ export const Unselected: Story = {
 };
 
 export const Selected: Story = {
-  // @ts-expect-error storybook does not understand missing props
   args: {
     isSelected: true,
     isClickable: true,
@@ -95,20 +94,7 @@ export const Selected: Story = {
 };
 
 export const BlackSelected: Story = {
-  // @ts-expect-error storybook does not understand missing props
   args: {
-    colors: {
-      title: '#fff',
-      text: '#fff',
-      background: '#1e252b',
-      backgroundHover: '#1e252b',
-      border: 'transparent',
-      borderHover: 'transparent',
-      chip: {
-        background: '#fff',
-        text: '#1e252b',
-      },
-    },
     isSelected: true,
     isClickable: true,
   },

@@ -1,18 +1,18 @@
 import { styled } from 'styled-components';
 import { ButtonProps } from './Button.types';
-import { cIdentifier, cVar, createGenerator } from 'themthem/component';
+import { cVar, createGenerator } from 'themthem/component';
 import { gVar } from 'themthem/global';
 
-type VariantColors = {
-  default: {
-    background: string;
-    text: string;
-  };
-  hover: {
-    background: string;
-    text: string;
-  };
-};
+// type VariantColors = {
+//   default: {
+//     background: string;
+//     text: string;
+//   };
+//   hover: {
+//     background: string;
+//     text: string;
+//   };
+// };
 
 // const BUTTONS_COLORS: Record<ButtonProps['variant'], VariantColors> = {
 //   primary: {
@@ -82,9 +82,9 @@ export const ButtonRoot = styled.button<Pick<ButtonProps, 'variant'>>`
   }
 
   ${(props) => generateButtonColorsVarsFromVariant(props.variant)};
-  // old way
-  /* 
-  ${(props) => [
-    `${cIdentifier('Button.colors.background')}: <var>`, // --ma_var: <var>
-  ]} */
 `;
+// old way
+/* 
+${(props) => [
+  `${cIdentifier('Button.colors.background')}: <var>`, // --ma_var: <var>
+]} */

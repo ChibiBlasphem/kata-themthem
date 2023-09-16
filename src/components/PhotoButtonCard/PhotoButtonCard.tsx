@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { Button } from '../Button/Button';
-import { Card } from '../Card/Card';
 import {
   PhotoButtonCardDescription,
   PhotoButtonCardImage,

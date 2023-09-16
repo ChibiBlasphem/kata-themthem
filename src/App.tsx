@@ -1,7 +1,5 @@
 import { styled } from 'styled-components';
 import { AppGlobalStyles } from './global.styles';
-import { Card } from './components/Card/Card';
-import { Button } from './components/Button/Button';
 import { PhotoButtonCard } from './components/PhotoButtonCard/PhotoButtonCard';
 
 const Container = styled.div`

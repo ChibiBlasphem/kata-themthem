@@ -6,16 +6,16 @@ const globalThemeVars = generateVars({
     black: '#000',
     white: '#fff',
     blue: {
-      $light: '#6a7fdb',
-      $dark: '#5b72d7',
+      light: '#6a7fdb',
+      dark: '#5b72d7',
     },
     green: {
-      $light: '#4ed7b5',
-      $dark: '#37d2ab',
+      light: '#4ed7b5',
+      dark: '#37d2ab',
     },
     red: {
-      $light: '#e08dac',
-      $dark: '#d86f95',
+      light: '#e08dac',
+      dark: '#d86f95',
     },
   },
 });
@@ -24,8 +24,8 @@ const lightColors = generateVars({
   variants: {
     primary: {
       background: {
-        $default: gVar('palette.blue.$light'),
-        $hover: gVar('palette.blue.$dark'),
+        $default: gVar('palette.blue.light'),
+        $hover: gVar('palette.blue.dark'),
       },
       text: {
         $default: gVar('palette.white'),
@@ -34,8 +34,8 @@ const lightColors = generateVars({
     },
     secondary: {
       background: {
-        $default: gVar('palette.green.$light'),
-        $hover: gVar('palette.green.$dark'),
+        $default: gVar('palette.green.light'),
+        $hover: gVar('palette.green.dark'),
       },
       text: {
         $default: gVar('palette.black'),
@@ -44,8 +44,8 @@ const lightColors = generateVars({
     },
     error: {
       background: {
-        $default: gVar('palette.red.$light'),
-        $hover: gVar('palette.red.$dark'),
+        $default: gVar('palette.red.light'),
+        $hover: gVar('palette.red.dark'),
       },
       text: {
         $default: gVar('palette.black'),

@@ -2,13 +2,13 @@ interface GlobalDesignTokenBox {
   palette: {
     $values: ['white', 'black'];
     blue: {
-      $modifiers: ['light', 'dark'];
+      $values: ['light', 'dark'];
     };
     green: {
-      $modifiers: ['light', 'dark'];
+      $values: ['light', 'dark'];
     };
     red: {
-      $modifiers: ['light', 'dark'];
+      $values: ['light', 'dark'];
     };
   };
   variants: {
