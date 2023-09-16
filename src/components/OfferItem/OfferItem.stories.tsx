@@ -1,19 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { OfferItem } from './OfferItem';
-
-const defaultColors = {
-  title: '#3653cc',
-  text: '#000',
-  background: '#fff',
-  backgroundHover: '#ebeefa',
-  border: '#ebeefa',
-  borderHover: 'transparent',
-  chip: {
-    background: '#3653cc',
-    text: '#fff',
-  },
-};
+import { generateOfferItemVars } from './OfferItem.styles';
+import styled, { css } from 'styled-components';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
@@ -27,12 +16,9 @@ const meta = {
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    colors: {
-      control: 'object',
-      defaultValue: defaultColors,
-    },
     onClick: { action: 'clicked' },
   },
+  // fyi : decorators f*up the Story type, making it BaseAnnotations<ReactRenderer, never>
   decorators: [
     (Story) => {
       return (
@@ -47,33 +33,65 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const defaultOfferItemVariables = generateOfferItemVars({
+  title: '#3653cc',
+  text: '#000',
+  background: {
+    $default: '#fff',
+    $hover: '#ebeefa',
+  },
+  border: {
+    $default: '#ebeefa',
+    $hover: 'transparent',
+  },
+  chip: {
+    background: '#3653cc',
+    text: '#fff',
+  },
+});
+
+const selectedOfferItemVariables = generateOfferItemVars({
+  title: '#fff',
+  text: '#fff',
+  background: {
+    $default: '#3653cc',
+    $hover: '#3653cc',
+  },
+  border: {
+    $default: 'transparent',
+    $hover: 'transparent',
+  },
+  chip: {
+    background: '#fff',
+    text: '#3653cc',
+  },
+});
+
+const DefaultOfferItem = styled(OfferItem)`
+  ${defaultOfferItemVariables}
+  ${(props) =>
+    props.isSelected &&
+    css`
+      ${selectedOfferItemVariables}
+    `};
+`;
+
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Unselected: Story = {
   args: {
-    colors: defaultColors,
     isSelected: false,
     isClickable: true,
   },
+  render: (props) => <DefaultOfferItem {...props} />,
 };
 
 export const Selected: Story = {
   // @ts-expect-error storybook does not understand missing props
   args: {
-    colors: {
-      title: '#fff',
-      text: '#fff',
-      background: '#3653cc',
-      backgroundHover: '#3653cc',
-      border: 'transparent',
-      borderHover: 'transparent',
-      chip: {
-        background: '#fff',
-        text: '#3653cc',
-      },
-    },
     isSelected: true,
     isClickable: true,
   },
+  render: (props) => <DefaultOfferItem {...props} />,
 };
 
 export const BlackSelected: Story = {

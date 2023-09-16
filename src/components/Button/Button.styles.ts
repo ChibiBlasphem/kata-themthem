@@ -1,5 +1,7 @@
 import { styled } from 'styled-components';
 import { ButtonProps } from './Button.types';
+import { cIdentifier, cVar, createGenerator } from 'themthem/component';
+import { gVar } from 'themthem/global';
 
 type VariantColors = {
   default: {
@@ -12,37 +14,55 @@ type VariantColors = {
   };
 };
 
-const BUTTONS_COLORS: Record<ButtonProps['variant'], VariantColors> = {
-  primary: {
-    default: {
-      background: '#6a7fdb',
-      text: '#fff',
+// const BUTTONS_COLORS: Record<ButtonProps['variant'], VariantColors> = {
+//   primary: {
+//     default: {
+//       background: '#6a7fdb',
+//       text: '#fff',
+//     },
+// RIP a11y
+//     hover: {
+//       background: '#5b72d7',
+//       text: '#fff',
+//     },
+//   },
+//   secondary: {
+//     default: {
+//       background: '#4ed7b5',
+//       text: '#000',
+//     },
+//     hover: {
+//       background: '#37d2ab',
+//       text: '#fff',
+//     },
+//   },
+//   error: {
+//     default: {
+//       background: '#e08dac',
+//       text: '#000',
+//     },
+//     hover: {
+//       background: '#d86f95',
+//       text: '#fff',
+//     },
+//   },
+// };
+
+const generateButtonVars = createGenerator('Button.colors');
+
+const generateButtonColorsVarsFromVariant = (
+  variant: ButtonProps['variant']
+) => {
+  return generateButtonVars({
+    background: {
+      $default: gVar(`variants.${variant}.background`),
+      $hover: gVar(`variants.${variant}.background.$hover`),
     },
-    hover: {
-      background: '#5b72d7',
-      text: '#fff',
+    text: {
+      $default: gVar(`variants.${variant}.text`),
+      $hover: gVar(`variants.${variant}.text.$hover`),
     },
-  },
-  secondary: {
-    default: {
-      background: '#4ed7b5',
-      text: '#000',
-    },
-    hover: {
-      background: '#37d2ab',
-      text: '#fff',
-    },
-  },
-  error: {
-    default: {
-      background: '#e08dac',
-      text: '#000',
-    },
-    hover: {
-      background: '#d86f95',
-      text: '#fff',
-    },
-  },
+  });
 };
 
 export const ButtonRoot = styled.button<Pick<ButtonProps, 'variant'>>`
@@ -53,13 +73,18 @@ export const ButtonRoot = styled.button<Pick<ButtonProps, 'variant'>>`
   border: none;
   border-radius: calc(40px / 2);
   cursor: pointer;
+  background-color: ${cVar('Button.colors.background')};
+  color: ${cVar('Button.colors.text')};
 
-  ${(props) =>
-    `background-color: ${BUTTONS_COLORS[props.variant].default.background};
-    color: ${BUTTONS_COLORS[props.variant].default.text};
-  
-    &:hover {
-      background-color: ${BUTTONS_COLORS[props.variant].hover.background};
-      color: ${BUTTONS_COLORS[props.variant].hover.text};
-    }`}
+  &:hover {
+    background-color: ${cVar('Button.colors.background.$hover')};
+    color: ${cVar('Button.colors.text.$hover')};
+  }
+
+  ${(props) => generateButtonColorsVarsFromVariant(props.variant)};
+  // old way
+  /* 
+  ${(props) => [
+    `${cIdentifier('Button.colors.background')}: <var>`, // --ma_var: <var>
+  ]} */
 `;
